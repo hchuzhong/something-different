@@ -1,0 +1,27 @@
+
+<!--index.wxml-->
+<view  wx:if="{{!combine}}">
+    <view class="container" 
+          id="container"
+          bind:touchstart="touchStart" 
+          bind:touchend="touchEnd"
+          bind:touchmove="touchMove">
+      <image class="bg" src="{{bgPic}}"></image>
+      <icon type="waiting" class="control" id="control" color="green" wx:if="{{showIcon}}"
+            style="top:{{controlY-10+'px'}};left:{{controlX-10+'px'}}"></icon>
+      <image class="icon" id='icon' src="{{iconSrc}}" wx:if="{{showIcon}}"
+      style="top:{{iconCenterY-iconSize/2-2+'px'}};left:{{iconCenterX-iconSize/2-2+'px'}};transform:rotate({{rotate+'deg'}}) scale({{scale}})"
+      ></image>
+    </view>
+  
+  <button bind:tap="chooseIcon">自定义图标</button>
+  <button bind:tap="combinePic">下一步</button>
+   <scroll-view class="scrollView" scroll-x="true" >
+    <image class="imgList" 
+        wx:for="...imgList" wx:key="index" 
+        src="{{imgList[index]}}"
+        data-icon-Id="{{index}}"
+        bind:tap="getIcon"></image>
+  </scroll-view> 
+</view>
+
