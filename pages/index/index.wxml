@@ -1,11 +1,11 @@
 <!--pages/index/index.wxml-->
 
 <view class="container">
-  <image class="bgPic" wx:if="{{bgPic}}" src="{{bgPic}}"></image>
+  <image mode="aspectFit" class="bgPic" wx:if="{{bgPic}}" src="{{bgPic}}"></image>
   <view class="emptyBg" wx:else></view>
 </view>
 <view class="btnContainer">
-  <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">使用头像</button>
+  <button open-type="getUserInfo" bindgetuserinfo="getAvatar">使用头像</button>
   <button bind:tap="chooseImage">使用相机/相册</button>
   <button bind:tap="nextPage" disabled="{{!picChoosed}}">下一步</button>
 </view>

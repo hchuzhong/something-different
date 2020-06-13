@@ -19,9 +19,16 @@ App({
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {
+              //修改头像路径的后缀使其清晰度正常
+              var oldUrl = res.userInfo.avatarUrl;
+              oldUrl = oldUrl.split('/');
+              if(oldUrl[oldUrl.length-1] === "132"){
+                oldUrl[oldUrl.length-1] = "0";
+              }
+              oldUrl = oldUrl.join('/');
+              res.userInfo.avatarUrl = oldUrl;
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -41,6 +48,7 @@ App({
     rotate:0,
     iconCenterX:0,
     iconCenterY:0,
-    picWidth: 0
+    picWidth: 0,
+    picHeight: 0
   }
 })

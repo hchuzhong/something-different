@@ -7,8 +7,7 @@ Page({
    */
   data: {
     bgPic:null,
-    picChoosed:false,
-    picWidth: 0
+    picChoosed:false
   },
 
   assignPicChoosed() {
@@ -16,27 +15,37 @@ Page({
       this.setData({
         picChoosed: true
       })
+      wx.getImageInfo({
+        src: this.data.bgPic,
+        success(res){
+          var width = res.width;
+          var height = res.height;
+          if(width>=height){ //当图片宽度比高度大时，将高度减小
+            var ratio = width/height;
+            app.globalData.picWidth = 300;
+            app.globalData.picHeight = 300/ratio;
+          }
+          else{ //当图片高度比宽度大时，将宽度减小
+            var ratio = height/width;
+            app.globalData.picWidth = 300/ratio;
+            app.globalData.picHeight = 300;
+          }
+        },
+        fail(res){
+          console.log(res)
+        }
+      })
     } else {
       this.setData({
         picChoosed: false
       })
     }
   },
-  bindGetUserInfo(e) {
+  getAvatar(e) {
     if (app.globalData.userInfo) {
       this.setData({
         bgPic: app.globalData.userInfo.avatarUrl,
       });
-      var that = this;
-      wx.getImageInfo({
-        src: 'image/1.png',
-        success(res) {
-          console.log(res)
-        },
-        fail(res) {
-          console.log(res)
-        }
-      })
       this.assignPicChoosed();
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理

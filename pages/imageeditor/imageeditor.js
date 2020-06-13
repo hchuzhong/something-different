@@ -27,7 +27,7 @@ Page({
     this.setData({
       bgPic: app.globalData.bgPic
     })
-    },
+  },
   
   onReady(){  //将当前页面的参数赋值给window
     this.iconCenterX = this.data.iconCenterX;
@@ -156,7 +156,7 @@ Page({
       showIcon: true
     })
   },
-  combinePic(){
+  nextPage(){
     app.globalData.scale=this.scale;
     app.globalData.rotate = this.rotate;
     app.globalData.iconCenterX = this.iconCenterX;
